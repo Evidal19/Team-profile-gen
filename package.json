@@ -1,0 +1,30 @@
+{
+  "name": "team-profile-gen",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Evidal19/Team-profile-gen",
+  "license": "ISC",
+  "main": "index.js",
+  "packages": {},
+  "bugs": {
+    "url": "https://github.com/Evidal19/Team-profile-gen"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Evidal19/Team-profile-gen"
+  },
+  "scripts": {
+    "test": "jest --verbose test/*",
+    "start": "node index"
+  },
+  "dependencies": {
+    "index.js": "^0.0.3"
+  }
+}
