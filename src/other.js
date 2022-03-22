@@ -1,7 +1,7 @@
-const generateTeam = team => {
+const createTeam = team => {
 
   // create the html for engineers
-  const generateEngineer = engineer => {
+  const createEngineer = engineer => {
       return `
       <div class="card employee-card">
   <div class="card-header">
@@ -20,7 +20,7 @@ const generateTeam = team => {
   };
 
 //    create the manager html
-  const generateManager = manager => {
+  const createManager = manager => {
       return `
       <div class="card employee-card">
       <div class="card-header">
@@ -40,7 +40,7 @@ const generateTeam = team => {
 
 
   // create the html for interns
-  const generateIntern = intern => {
+  const createIntern = intern => {
       return `
       <div class="card employee-card">
   <div class="card-header">
@@ -62,16 +62,16 @@ const generateTeam = team => {
 
   html.push(team
       .filter(employee => employee.getRole() === "Manager")
-      .map(manager => generateManager(manager))
+      .map(manager => createManager(manager))
   );
   html.push(team
       .filter(employee => employee.getRole() === "Engineer")
-      .map(engineer => generateEngineer(engineer))
+      .map(engineer => createEngineer(engineer))
       .join("")
   );
   html.push(team
       .filter(employee => employee.getRole() === "Intern")
-      .map(intern => generateIntern(intern))
+      .map(intern => createIntern(intern))
       .join("")
   );
 
@@ -108,7 +108,7 @@ module.exports = team => {
   <div class="container">
       <div class="row">
           <div class="team-area col-12 d-flex justify-content-center">
-              ${generateTeam(team)}
+              ${createTeam(team)}
           </div>
       </div>
   </div>

@@ -75,7 +75,7 @@ function memberCard() {
         {
           type: "list",
           message: "Choose one of the options below",
-          choices: ["Intern, Engineer, Manager"],
+          choices: ["Intern", "Engineer", "Manager"],
           name: "optionList",
           validate: (response) => {
             if (response) {
