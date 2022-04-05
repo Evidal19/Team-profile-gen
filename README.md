@@ -11,7 +11,7 @@ Gets employees infomation as quickly and convenient as possbile
 -Node.js
 
 ## Sample 
-Screen Shot 2022-04-04 at 8.51.12 PM.png
+![alt text] (file:///Users/elisavidal/Desktop/Screen%20Shot%202022-04-04%20at%209.02.45%20PM.png)
 
 ## Contributor
 Evidal19
