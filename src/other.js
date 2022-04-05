@@ -1,8 +1,8 @@
-const createTeam = team => {
 
+const createTeam = (team) => {
   // create the html for engineers
-  const createEngineer = engineer => {
-      return `
+  const createEngineer = (engineer) => {
+    return `
       <div class="card employee-card">
   <div class="card-header">
       <h2 class="card-title">${engineer.getName()}</h2>
@@ -19,9 +19,9 @@ const createTeam = team => {
       `;
   };
 
-//    create the manager html
-  const createManager = manager => {
-      return `
+  //    create the manager html
+  const createManager = (manager) => {
+    return `
       <div class="card employee-card">
       <div class="card-header">
           <h2 class="card-title">${manager.getName()}</h2>
@@ -38,10 +38,9 @@ const createTeam = team => {
       `;
   };
 
-
   // create the html for interns
-  const createIntern = intern => {
-      return `
+  const createIntern = (intern) => {
+    return `
       <div class="card employee-card">
   <div class="card-header">
       <h2 class="card-title">${intern.getName()}</h2>
@@ -57,6 +56,7 @@ const createTeam = team => {
 </div>
       `;
   };
+
 
   const html = [];
 
@@ -80,8 +80,7 @@ const createTeam = team => {
 }
 
 // export function to generate entire page
-module.exports = team => {
-
+module.exports = (team) => {
   return `
   <!DOCTYPE html>
 <html lang="en">

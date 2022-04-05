@@ -1,19 +1,14 @@
-const generate = require("./src/other.js");
-
 const fs = require("fs");
 const inquirer = require("inquirer");
-const path = require("path");
-
-const transfer = path.resolve(__dirname, "transfer");
-const transferPath = path.join(transfer, "index.html");
+const other = require('./src/other');
 
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const Employee = require("./lib/Employee.js");
+const Employee = require("./lib/Employee");
 
 const newMembers = [];
-const response = [];
+
 
 function memberCard() {
   function createEngineer() {
@@ -72,29 +67,11 @@ function memberCard() {
             }
           },
         },
-        {
-          type: "list",
-          message: "Choose one of the options below",
-          choices: ["Intern", "Engineer", "Manager"],
-          name: "optionList",
-          validate: (response) => {
-            if (response) {
-              return true;
-            } else {
-              console.log("Select one please");
-              return false;
-            }
-          },
-        },
       ])
-      .then((responses) => {
-        const Engineer = new Engineer(
-          response.engineerName,
-          response.engineerId,
-          response.engineerEmail,
-          response.engineerGithub
-        );
-        newMembers.push(responses.engineer);
+      .then(({name, ID, email, github}) => {
+        const newEngineer  = new Engineer(name, ID, email, github);
+        newMembers.push(newEngineer);
+        console.log(newEngineer)
         createEmployee();
       });
   }
@@ -107,11 +84,11 @@ function memberCard() {
           type: "list",
           name: "choices",
           message: "Which type of team member would you like to add?",
-          choices: ["Engineer", "Intern", "No more members"],
+          choices: ["Engineer", "Intern", "Manager","Done"],
         },
       ])
       .then((multipleChoice) => {
-        switch (multipleChoice.selectedChoice) {
+        switch (multipleChoice.choices) {
           case "Engineer":
             createEngineer();
             break;
@@ -120,8 +97,10 @@ function memberCard() {
             break;
           case "Intern":
             createIntern();
+            break;
           default:
             makeGroup();
+
         }
       });
   }
@@ -182,41 +161,21 @@ function memberCard() {
             }
           },
         },
-        {
-          type: "list",
-          message: "Choose one of the options below",
-          choices: ["Intern, Engineer, Manager"],
-          name: "optionList",
-          validate: (response) => {
-            if (response) {
-              return true;
-            } else {
-              console.log("Select one please");
-              return false;
-            }
-          },
-        },
       ])
-      .then((responses) => {
-        console.log(response);
-        const Manager = new Manager(
-          response.managerName,
-          response.managerId,
-          response.managerrEmail,
-          response.managerOfficeNumber
-        );
-        newMembers.push(responses.manager);
-        createEmployee();
-      });
+        .then(({name, ID, email, officeNumber}) => {
+          const newManager  = new Manager(name, ID, email, officeNumber);
+          newMembers.push(newManager);
+          console.log(newManager)
+          createEmployee();
+        });
   }
-
   function createIntern() {
     console.log(Intern);
     inquirer
       .prompt([
         {
           type: "input",
-          message: "What is the inters name?",
+          message: "What is the interns name?",
           name: "name",
           validate: (response) => {
             if (response) {
@@ -266,42 +225,31 @@ function memberCard() {
             }
           },
         },
-        {
-          type: "list",
-          message: "Choose one of the options below",
-          choices: ["Intern, Engineer, Manager"],
-          name: "optionList",
-          validate: (response) => {
-            if (response) {
-              return true;
-            } else {
-              console.log("Select one please");
-              return false;
-            }
-          },
-        },
       ])
-      .then((responses) => {
-        console.log(response);
-        const Intern = new Intern(
-          response.internName,
-          response.internId,
-          response.internEmail,
-          response.internSchool
-        );
-        newMembers.push(responses.intern);
+      .then(({name, ID, email, school}) => {
+        const newIntern  = new Intern(name, ID, email, school);
+        newMembers.push(newIntern);
+        console.log(newIntern)
         createEmployee();
       });
+  } 
+ function makeGroup() {
+   try {
+   const response = other(newMembers)
+   console.log(response)
+    fs.writeFileSync("index.html", response)
+  } catch (err) {
+    console.error(err)
   }
+  
+ }
 
-  function makeGroup() {
-    if (!fs.existsSync(transfer)) {
-      fs.mkdirSync(transfer);
-    }
-    fs.writeFileSync(transferPath, generate(newMembers), "utf-8");
-  }
+  createEmployee()
+ 
 
-  createEngineer();
 }
+memberCard()
 
-memberCard();
+
+
+
